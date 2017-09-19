@@ -1,0 +1,37 @@
+<div class="jumbotron text-center">
+<h1>Eventos</h1>
+
+
+<table class="table table-bordered table-hover table-striped">
+
+<thead>
+	
+	<a href="/events/create" class=btn btn-large">New</a>
+
+	<tr>
+		<th>Nombre del evento</th>
+		<th>Descripción del evento</th>
+		<th></th>
+	</tr>
+</thead>
+<tbody>
+
+
+	<% for (var event of events) { %>
+		<tr>
+			<td><%= event.name %></td>
+			<td><%=event.description %></td>
+			<td>
+				<a href="/events/<%= event.slug %>" class=btn btn-large">View</a>
+				<a href="/events/<%= event.slug %>/edit" class=btn btn-large">Edit</a>
+				<a href="/events/<%= event.slug %>/delete" class=btn btn-large">Delete</a>
+			</td>
+		</tr>
+
+	<% } %>
+
+
+</tbody>
+</table>
+</div>
+
