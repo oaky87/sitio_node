@@ -61,7 +61,7 @@ app.use(expressValidator());
 //routear==============================================
 app.use(require('./app/rutas/routes'));//le digo donde buscar el archivo que describe las rutas de la app
 app.use(require('./app/rutas/login_routes'));
-
+app.use(require('./app/rutas/upload_routes'));
 //lanzar servidor======================================
 app.listen(port, ()=>{
 	console.log(`Aplicacion corriendo en el puerto ${port}`);

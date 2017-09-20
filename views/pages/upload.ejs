@@ -1,22 +1,38 @@
-<div class="jumbotron text-center">
-    <h1>Subir archivo</h1>
-</div>
-   show any messages that come back with authentication -->
 
-<div class="row">
-    <div class="col-sm-6 outer-top-md inner-right-sm animated fadeInUp">
+  <div class="container">
 
-       <div class="form-group">
-         <div class="form-group">
-         <!--  <% if (message.length > 0) { %>
-        <div class="alert alert-danger"><%= message %></div>
-    <% } %> -->
-          <form action="http://localhost:8080/pages/upload" method="POST"  encType="multipart/form-data">
+<div class="col-sm-6 outer-top-md inner-right-sm animated fadeInUp">
+
+    <h1><span class="fa fa-sign-in"></span> Subir archivos</h1>
+
+   <% if (msg.length > 0) { %>
+        <div class="alert alert-danger"><%= msg %></div>
+    <% } else{ %>  
+    <h1>naranja</h1>
+    <% } %>
+
+ 
+          <form action="/pages/upload" method="POST"  encType="multipart/form-data">
             <input type="file" name="sampleFile" />
             
            <button type="submit" class="btn btn-success btn-lg">Subir</button>
-          </form>   
+          </form>
+
+          
+ <form action="/pages/upload" method="POST"  encType="multipart/form-data">
+<input id="txt" type = "text" value = "Choose File" 
+       onclick ="javascript:document.getElementById('file').click();">
+      <input id = "file" type="file" style='visibility: hidden;' name="img" onchange="ChangeText(this, 'txt');"/>
+<button type="submit" class="btn btn-success btn-lg">Subir</button>
+   </form>
         </div> 
     </div>
-  </div>
+    <script type="text/javascript">
+      function ChangeText(oFileInput, sTargetID) {
+
+    document.getElementById(sTargetID).value = oFileInput.value;
+}
+
+    </script>
+    </div>
 </div>

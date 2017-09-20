@@ -1,55 +1,37 @@
-const express            = require('express'),
-	router                 = express.Router();//creo nuevo objeto router
-	mainController         = require('../controllers/main.controller');//llamo al archivo main.controller
-	eventsController       = require('../controllers/events.controller');
-  loginController        = require('../controllers/login.controller');
-  passport               = require('passport');
-  uploadController			=require('../controllers/uploadController');
- 
+const express = require('express');
 const fileUpload = require('express-fileupload');
+const appFileUpload = express();
 
 
-router.use(fileUpload({ safeFileNames: true, preserveExtension: true }));
-
-
-router.get('/pages/upload',        uploadController.showUpload);
+  
 
 // default options
-// router.use(fileUpload({
-//   limits: { fileSize: 50 * 1024 * 1024 },
-// }));
-router.use(fileUpload({ safeFileNames: true, preserveExtension: true }));
+appFileUpload.use(fileUpload());
+appFileUpload.get('/pages/upload', function(req,res){
+res.render('pages/upload', { msg:''});
+});
 
-router.get('/pages/upload',  function(req, res) {
-        res.render('pages/upload');
-    });
- 
-router.post('/pages/upload', function(req, res,err) {
+appFileUpload.post('/pages/upload', function(req, res) {
+
+  //res.render('pages/upload', { msg:''});
   if (!req.files)
     return res.status(400).send('No files were uploaded.');
-  if (err)
-  
-res.render('pages/upload', { message: req.flash('signupMessage') });
-
- 
+    //res.render('pages/upload');
  
   // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
   let sampleFile = req.files.sampleFile;
- 
-  // Use the mv() method to place the file somewhere on your server
+  if(!sampleFile)
+    res.render('pages/upload', { msg:'Seleccione un archivo'});
+  //Use the mv() method to place the file somewhere on your server
   sampleFile.mv('./uploads/filename.jpg', function(err) {
     if (err)
       return res.status(500).send(err);
-    
+ 
     //res.send('File uploaded!');
-    res.render('pages/upload');
+    res.render('pages/upload', { msg:'Archivo subido'});
   });
+
 });
 
-
-//proceso logeo
-// router.post('/pages/upload', function(req, res) {
-//         successRedirect : '/pages/profile', // redirect to the secure profile section
-//         failureRedirect : '/pages/login', // redirect back to the signup page if there is an error
-//         failureFlash : true // allow flash messages
-//     });
+//exporto router para que sea accesible
+module.exports = appFileUpload;

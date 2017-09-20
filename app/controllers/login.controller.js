@@ -6,7 +6,7 @@ module.exports= {
 	showProfile: showProfile,
 	logOut: logOut,
 	showLogged: showLogged,
-	showAbout_us: showAbout_us,
+	showAdmin: showAdmin,
 
 
 	}
@@ -27,7 +27,7 @@ function showLogin(req, res){
 
 
  ///////////////////
-function showAbout_us(req, res){
+function showAdmin(req, res){
 
    var drinks = [
         { name: 'Bloody Mary', drunkness: 3 },
@@ -38,7 +38,8 @@ function showAbout_us(req, res){
 
 
   if (req.isAuthenticated())
-         res.render('pages/about_us', {
+         res.render('pages/admin', {
+            layout:'logged',
             user : req.user,
              drinks: drinks,
         tagline: tagline
