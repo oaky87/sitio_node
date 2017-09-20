@@ -1,0 +1,22 @@
+<div class="jumbotron text-center">
+    <h1>Subir archivo</h1>
+</div>
+   show any messages that come back with authentication -->
+
+<div class="row">
+    <div class="col-sm-6 outer-top-md inner-right-sm animated fadeInUp">
+
+       <div class="form-group">
+         <div class="form-group">
+         <!--  <% if (message.length > 0) { %>
+        <div class="alert alert-danger"><%= message %></div>
+    <% } %> -->
+          <form action="http://localhost:8080/pages/upload" method="POST"  encType="multipart/form-data">
+            <input type="file" name="sampleFile" />
+            
+           <button type="submit" class="btn btn-success btn-lg">Subir</button>
+          </form>   
+        </div> 
+    </div>
+  </div>
+</div>
