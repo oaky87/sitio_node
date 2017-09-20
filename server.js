@@ -14,8 +14,9 @@ const express 		= require ('express'),
 	flash			= require('connect-flash'),
 	expressValidator= require('express-validator'),
 	passport 		= require('passport'),
-	morgan       	= require('morgan');;
-
+	morgan       	= require('morgan')
+	
+	
 
 
 

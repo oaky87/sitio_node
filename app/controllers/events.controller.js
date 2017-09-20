@@ -20,7 +20,7 @@ module.exports= {
 		Event.find({}, (err, events) => {
 			console.log(events);
 			if (err){
-				res.staturs(404);
+				res.status(404);
 				res.send('Listado de eventos no encontrados');
 			}
 		

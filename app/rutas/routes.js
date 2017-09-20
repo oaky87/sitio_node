@@ -8,6 +8,41 @@ const express            = require('express'),
 	eventsController       = require('../controllers/events.controller');
   loginController        = require('../controllers/login.controller');
   passport               = require('passport');
+ 
+const fileUpload = require('express-fileupload');
+ 
+// default options
+// router.use(fileUpload({
+//   limits: { fileSize: 50 * 1024 * 1024 },
+// }));
+router.use(fileUpload({ safeFileNames: true, preserveExtension: true }));
+
+// router.get('/pages/upload',  function(req, res) {
+//         res.render('pages/upload');
+//     });
+ 
+router.post('/pages/upload', function(req, res,err) {
+  if (!req.files)
+    return res.status(400).send('No files were uploaded.');
+  if (err)
+  
+res.render('pages/upload', { message: req.flash('signupMessage') });
+
+ 
+ 
+  // The name of the input field (i.e. "sampleFile") is used to retrieve the uploaded file
+  let sampleFile = req.files.sampleFile;
+ 
+  // Use the mv() method to place the file somewhere on your server
+  sampleFile.mv('./uploads/filename.jpg', function(err) {
+    if (err)
+      return res.status(500).send(err);
+    
+    //res.send('File uploaded!');
+    res.render('pages/upload');
+  });
+});
+
 
 //exporto router para que sea accesible
 module.exports = router;
@@ -37,7 +72,13 @@ router.post('/events/:slug',     eventsController.processEdit);
 //borrar registro
 router.get('/events/:slug/delete', eventsController.deleteEvent);
 
+//-------------------------------
 
+
+
+
+
+//--------------------------------
 
 // route middleware to make sure a user is logged in
 function isLoggedIn(req, res, next) {
